@@ -1,0 +1,9 @@
+@if (character(); as char) {
+    @if (mechanics(); as mechs) {
+        <div class="max-w-2xl mx-auto">
+            <app-character-sheet [character]="char" [mechanics]="mechs" />
+        </div>
+    }
+} @else {
+    <p class="text-center text-gray-500">No active character. Please create one in the CREATION tab.</p>
+}
