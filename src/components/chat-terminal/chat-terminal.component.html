@@ -1,0 +1,63 @@
+<div class="h-[calc(100vh-8rem)] flex flex-col bg-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-xl shadow-2xl">
+  <!-- Message Area -->
+  <div #chatContainer class="flex-1 p-6 space-y-6 overflow-y-auto">
+    @for (message of messages(); track $index) {
+      <div class="flex animate-fade-in" 
+           [class.justify-end]="message.author === 'user'"
+           [class.justify-center]="message.author === 'system'">
+        
+        <!-- AI/GM Message -->
+        @if (message.author === 'ai') {
+          <div class="max-w-xl">
+            <div class="p-4 rounded-lg rounded-bl-none bg-gray-700 text-gray-300 leading-relaxed whitespace-pre-wrap border-l-4 border-indigo-500">
+              {{ message.text }}
+            </div>
+          </div>
+        }
+
+        <!-- System Message -->
+        @if (message.author === 'system') {
+          <div class="max-w-xl text-center">
+            <div class="p-2 rounded-lg bg-gray-800/80 text-amber-400 font-semibold italic text-sm">
+             {{ message.text }}
+            </div>
+          </div>
+        }
+
+        <!-- Player Message -->
+        @if (message.author === 'user') {
+          <div class="max-w-xl">
+            <div class="p-4 rounded-lg rounded-br-none bg-gray-900 text-gray-200 border-r-4 border-emerald-500">
+              {{ message.text }}
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Input Area -->
+  <div class="p-4 border-t border-gray-700 bg-gray-900/50 rounded-b-xl">
+    <div class="flex items-center bg-gray-800 rounded-lg p-1 border border-gray-600 focus-within:ring-2 focus-within:ring-indigo-500">
+      <input 
+        type="text" 
+        placeholder="What do you do? Use [Stat] to roll."
+        [(ngModel)]="userInput"
+        (keydown.enter)="sendMessage()"
+        [disabled]="isLoading()"
+        class="flex-1 bg-transparent focus:outline-none px-3 text-gray-200 disabled:text-gray-500 placeholder:text-gray-500"
+      >
+      <button 
+        (click)="sendMessage()" 
+        [disabled]="isLoading() || !userInput()"
+        class="px-5 py-2 bg-indigo-600 text-white font-bold rounded-md hover:bg-indigo-700 disabled:bg-gray-600 disabled:cursor-not-allowed transition duration-200 w-[90px] flex justify-center items-center"
+      >
+        @if (isLoading()) {
+          <app-loading-spinner />
+        } @else {
+          <span>Act</span>
+        }
+      </button>
+    </div>
+  </div>
+</div>

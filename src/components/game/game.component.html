@@ -1,0 +1,14 @@
+@if (character(); as char) {
+    @if (mechanics(); as mechs) {
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <div class="lg:col-span-2">
+                <app-chat-terminal />
+            </div>
+            <div class="hidden lg:block">
+                <app-character-sheet [character]="char" [mechanics]="mechs" />
+            </div>
+        </div>
+    }
+} @else {
+    <p class="text-center text-gray-500">No active character. Please create one in the CREATION tab.</p>
+}
