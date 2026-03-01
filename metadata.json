@@ -1,0 +1,5 @@
+{
+  "name": "TTRPG AI Game Master",
+  "description": "A platform for a Hybrid AI Game Engine combining a deterministic ruleset engine with a large language model (LLM) for narrative generation and game mastering.",
+  "requestFramePermissions": []
+}
